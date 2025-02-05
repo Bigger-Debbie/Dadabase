@@ -1,0 +1,22 @@
+{
+  "name": "dadabase",
+  "version": "1.0.0",
+  "description": "Dad joke slinging API and site",
+  "main": "server.js",
+  "scripts": {
+    "start:dev": "nodemon server.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bigger-Debbie/Dadabase.git"
+  },
+  "author": "Alex Ross",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bigger-Debbie/Dadabase/issues"
+  },
+  "homepage": "https://github.com/Bigger-Debbie/Dadabase#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
