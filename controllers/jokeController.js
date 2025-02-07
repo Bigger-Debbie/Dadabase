@@ -19,8 +19,6 @@ exports.createJoke = async (req, res, next) => {
       joke,
     });
   } catch (error) {
-    console.log("Validation error:", error);
-
     res.status(400).json({
       status: "fail",
       message: error.message,
