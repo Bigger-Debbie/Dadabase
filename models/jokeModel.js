@@ -15,6 +15,7 @@ const jokeSchema = new mongoose.Schema({
       "We have to know the genius to give credit to. Please provide a name.",
     ],
   },
+  dailyJoke: Boolean,
 });
 
 const Joke = mongoose.model("Joke", jokeSchema);

@@ -1,7 +1,8 @@
 const Joke = require("../models/jokeModel");
 
-exports.getJoke = async (req, res, next) => {
-  const randomJoke = await Joke.aggregate([{ $sample: { size: 1 } }])[0];
+exports.getRandomJoke = async (req, res, next) => {
+  const randomJokeArray = await Joke.aggregate([{ $sample: { size: 1 } }]);
+  const randomJoke = randomJokeArray.length > 0 ? randomJokeArray[0] : null;
 
   res.status(200).json({
     status: "success",
