@@ -9,13 +9,30 @@ const jokeSchema = new mongoose.Schema({
     ],
   },
   dad: {
-    type: String,
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
     required: [
       true,
       "We have to know the genius to give credit to. Please provide a name.",
     ],
   },
-  dailyJoke: Boolean,
+  tags: {
+    type: [String],
+    index: true,
+  },
+  dailyJoke: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+// Add a pre-find middleware to automatically populate the dad field
+jokeSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "dad",
+    select: "name email", // Add whatever user fields you want to include
+  });
+  next();
 });
 
 const Joke = mongoose.model("Joke", jokeSchema);

@@ -1,6 +1,8 @@
 const Joke = require("../models/jokeModel");
+const User = require("../models/userModel");
+const catchAsync = require("../utils/catchAsync");
 
-exports.getRandomJoke = async (req, res, next) => {
+exports.getRandomJoke = catchAsync(async (req, res, next) => {
   const randomJokeArray = await Joke.aggregate([{ $sample: { size: 1 } }]);
   const randomJoke = randomJokeArray.length > 0 ? randomJokeArray[0] : null;
 
@@ -8,20 +10,30 @@ exports.getRandomJoke = async (req, res, next) => {
     status: "success",
     joke: randomJoke,
   });
-};
+});
 
-exports.createJoke = async (req, res, next) => {
-  try {
-    const joke = await Joke.create(req.body);
+exports.getJokeByTag = catchAsync(async (req, res, next) => {
+  if (!req.query.tags) return next();
+  const tags = req.query.tags.split(",");
+  const jokes = await Joke.find({ tags: { $in: tags } });
 
-    res.status(201).json({
-      status: "success",
-      joke,
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: "fail",
-      message: error.message,
-    });
-  }
-};
+  res.status(201).json({
+    status: "success",
+    jokes,
+  });
+});
+
+exports.createJoke = catchAsync(async (req, res, next) => {
+  let joke = await Joke.create({
+    joke: req.body.joke,
+    dad: req.user._id,
+    tags: req.body.tags,
+  });
+
+  joke = await Joke.findById(joke._id);
+
+  res.status(201).json({
+    status: "success",
+    joke,
+  });
+});

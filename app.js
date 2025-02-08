@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use("/api/jokes", jokeRouter);
+app.use("/api/joke", jokeRouter);
 app.use("/api/user/", userRouter);
 
 app.all("*", (req, res, next) => {
