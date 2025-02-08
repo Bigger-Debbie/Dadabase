@@ -3,8 +3,12 @@ const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
 
 exports.getRandomJoke = catchAsync(async (req, res, next) => {
-  const randomJokeArray = await Joke.aggregate([{ $sample: { size: 1 } }]);
-  const randomJoke = randomJokeArray.length > 0 ? randomJokeArray[0] : null;
+  const count = await Joke.countDocuments();
+  const random = Math.floor(Math.random() * count);
+  const randomJoke = await Joke.findOne().skip(random).populate({
+    path: "dad",
+    select: "name email",
+  });
 
   res.status(200).json({
     status: "success",
