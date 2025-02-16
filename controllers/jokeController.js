@@ -1,6 +1,16 @@
 const Joke = require("../models/jokeModel");
-const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
+
+const createJokeHelper = async (jokeText, userId, tags, status) => {
+  let joke = await Joke.create({
+    joke: jokeText,
+    dad: userId,
+    tags: tags,
+    status: status,
+  });
+
+  return Joke.findById(joke._id);
+};
 
 exports.getRandomJoke = catchAsync(async (req, res, next) => {
   const count = await Joke.countDocuments();
@@ -28,14 +38,12 @@ exports.getJokeByTag = catchAsync(async (req, res, next) => {
 });
 
 exports.createJoke = catchAsync(async (req, res, next) => {
-  let joke = await Joke.create({
-    joke: req.body.joke,
-    dad: req.user._id,
-    tags: req.body.tags,
-    status: "accepted",
-  });
-
-  joke = await Joke.findById(joke._id);
+  const joke = await createJokeHelper(
+    req.body.joke,
+    req.user._id,
+    req.body.tags,
+    "accepted"
+  );
 
   res.status(201).json({
     status: "success",
@@ -44,16 +52,24 @@ exports.createJoke = catchAsync(async (req, res, next) => {
 });
 
 exports.submitJoke = catchAsync(async (req, res, next) => {
-  let joke = await Joke.create({
-    joke: req.body.joke,
-    dad: req.user._id,
-    tags: req.body.tags,
-  });
-
-  joke = await Joke.findById(joke._id);
+  const joke = await createJokeHelper(
+    req.body.joke,
+    req.user._id,
+    req.body.tags,
+    "review"
+  );
 
   res.status(201).json({
     status: "success",
     joke,
+  });
+});
+
+exports.reviewJokes = catchAsync(async (req, res, next) => {
+  const reviewJokes = await Joke.find({ status: "review" });
+
+  res.status(201).json({
+    status: "success",
+    reviewJokes,
   });
 });
