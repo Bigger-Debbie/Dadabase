@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
+const Email = require("../utils/email");
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -142,3 +143,16 @@ exports.restrictedTo = (...roles) => {
     next();
   };
 };
+
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) return next(new AppError("No user found.", 404));
+
+  const resetURL = "test.com";
+  await new Email(user, resetURL).send();
+
+  res.status(200).json({
+    status: "success",
+    message: "Token sent to email!",
+  });
+});
