@@ -4,9 +4,13 @@ const authController = require("../controllers/authController");
 
 const router = express.Router();
 
-router
-  .route("/")
-  .get(jokeController.getJokeByTag, jokeController.getRandomJoke)
-  .post(authController.protect, jokeController.createJoke);
+router.get("/", jokeController.getJokeByTag, jokeController.getRandomJoke);
+
+router.use(authController.protect);
+router.use(authController.restrictedTo("user", "admin"));
+router.post("/submit", jokeController.submitJoke);
+
+router.use(authController.restrictedTo("admin"));
+router.post("/", jokeController.createJoke);
 
 module.exports = router;

@@ -32,6 +32,22 @@ exports.createJoke = catchAsync(async (req, res, next) => {
     joke: req.body.joke,
     dad: req.user._id,
     tags: req.body.tags,
+    status: "accepted",
+  });
+
+  joke = await Joke.findById(joke._id);
+
+  res.status(201).json({
+    status: "success",
+    joke,
+  });
+});
+
+exports.submitJoke = catchAsync(async (req, res, next) => {
+  let joke = await Joke.create({
+    joke: req.body.joke,
+    dad: req.user._id,
+    tags: req.body.tags,
   });
 
   joke = await Joke.findById(joke._id);

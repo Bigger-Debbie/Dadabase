@@ -24,6 +24,10 @@ const jokeSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  status: {
+    type: String,
+    default: "review",
+  },
 });
 
 // Add a pre-find middleware to automatically populate the dad field
