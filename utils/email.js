@@ -2,10 +2,9 @@ const nodemailer = require("nodemailer");
 const catchAsync = require("./catchAsync");
 
 module.exports = class Email {
-  constructor(user, url) {
+  constructor(user) {
     this.to = user.email;
     this.firstName = user.name.split(" ")[0];
-    this.url = url;
     this.from = `Do Not Reply <${process.env.EMAIL_FROM}>`;
   }
 
@@ -21,15 +20,22 @@ module.exports = class Email {
     });
   }
 
-  async send() {
+  async send(subject, message) {
     const options = {
       from: this.from,
       to: this.to,
-      subject: "Hello ✔",
-      text: "Hello world?",
-      html: "<b>Hello world? Guess its working...</b>",
+      subject: subject,
+      text: message,
+      html: `<p>${message}</p>`,
     };
 
     await this.newTransport().sendMail(options);
+  }
+
+  async forgotPassword(resetPath) {
+    await this.send(
+      "Password Reset",
+      `Your Password Reset Endpoint: ${resetPath}`
+    );
   }
 };
