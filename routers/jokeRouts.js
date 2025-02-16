@@ -12,6 +12,9 @@ router.post("/submit", jokeController.submitJoke);
 
 router.use(authController.restrictedTo("admin"));
 router.post("/", jokeController.createJoke);
-router.route("/review").get(jokeController.reviewJokes);
+router
+  .route("/review")
+  .get(jokeController.reviewJokes)
+  .patch(jokeController.acceptJokes);
 
 module.exports = router;
