@@ -79,34 +79,56 @@ exports.reviewJokes = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.acceptJokes = catchAsync(async (req, res, next) => {
-  const jokeIds = req.body.acceptedJokes;
-  if (!jokeIds || !Array.isArray(jokeIds) || jokeIds.length === 0)
-    return next(new AppError("Please provide an array of joke IDs", 400));
+exports.acceptJoke = catchAsync(async (req, res, next) => {
+  let joke = await Joke.findById(req.body.jokeId);
+  const tags = req.body.tags;
 
-  const jokes = await Joke.find({ _id: { $in: jokeIds } });
-  const acceptedJokes = jokes.filter((joke) => joke.status !== "accepted");
-  const alreadyAcceptedJokes = jokes.filter(
-    (joke) => joke.status === "accepted"
-  );
+  if (!joke) return next(new AppError("Please enter joke ID"));
 
-  if (acceptedJokes.length > 0) {
-    await Joke.updateMany(
-      { _id: { $in: acceptedJokes.map((joke) => joke._id) } },
-      { status: "accepted" }
+  if (joke.status === accepted)
+    return next(
+      new AppError(
+        "Joke is already accepted. To updated tags please use /api/joke/udate"
+      )
     );
-  }
 
-  if (!alreadyAcceptedJokes.length === 0) {
-    res.status(200).json({
-      status: "success",
-      acceptedJokes,
-      alreadyAcceptedJokes,
-    });
-  } else {
-    res.status(200).json({
-      status: "success",
-      acceptedJokes,
-    });
-  }
+  if (!Array.isArray(tags) || tags.length === 0)
+    return next(new AppError("Please enter an array of tags"));
+
+  await joke.updateOne({
+    tags: tags,
+    status: "accepted",
+  });
+
+  joke = await Joke.findById(req.body.jokeId);
+
+  res.status(200).json({
+    status: "success",
+    joke,
+  });
+});
+
+exports.updateJoke = catchAsync(async (req, res, next) => {
+  const jokeId = req.params.id;
+  const updatedJoke = await Joke.findByIdAndUpdate(jokeId, req.body, {
+    new: true,
+  });
+
+  if (!updatedJoke) return next(new AppError("Joke not found"), 404);
+
+  res.status(200).json({
+    status: "success",
+    joke: updatedJoke,
+  });
+});
+
+exports.deleteJoke = catchAsync(async (req, res, next) => {
+  const jokeId = req.params.id;
+  const updatedJoke = await Joke.findByIdAndDelete(jokeId);
+
+  if (!updatedJoke) return next(new AppError("Joke not found"), 404);
+
+  res.status(204).json({
+    status: "success",
+  });
 });

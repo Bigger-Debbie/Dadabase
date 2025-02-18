@@ -12,9 +12,14 @@ router.post("/submit", jokeController.submitJoke);
 
 router.use(authController.restrictedTo("admin"));
 router.post("/", jokeController.createJoke);
+
+router
+  .route("/:id")
+  .patch(jokeController.updateJoke)
+  .delete(jokeController.deleteJoke);
 router
   .route("/review")
   .get(jokeController.reviewJokes)
-  .patch(jokeController.acceptJokes);
+  .patch(jokeController.acceptJoke);
 
 module.exports = router;
