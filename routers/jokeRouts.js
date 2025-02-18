@@ -5,6 +5,7 @@ const authController = require("../controllers/authController");
 const router = express.Router();
 
 router.get("/", jokeController.getJokeByTag, jokeController.getRandomJoke);
+router.get("/dailyjoke", jokeController.getDailyJoke);
 
 router.use(authController.protect);
 router.use(authController.restrictedTo("user", "admin"));

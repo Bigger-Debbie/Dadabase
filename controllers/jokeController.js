@@ -132,3 +132,12 @@ exports.deleteJoke = catchAsync(async (req, res, next) => {
     status: "success",
   });
 });
+
+exports.getDailyJoke = catchAsync(async (req, res, next) => {
+  const dailyJoke = await Joke.find({ dailyJoke: true });
+
+  res.status(200).json({
+    status: "success",
+    dailyJoke,
+  });
+});
