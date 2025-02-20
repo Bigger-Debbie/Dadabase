@@ -4,6 +4,12 @@ body {
   margin: 0;
 }
 
+h1 {
+  font-family: "bebas-neue-rounded", sans-serif;
+  font-weight: 400;
+  font-size: 5rem;
+}
+
 h2 {
   font-size: 2rem;
 }
@@ -149,7 +155,7 @@ input {
 }
 
 .btn_container {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -157,19 +163,60 @@ input {
 }
 
 .cta_signup_btn {
-  height: 3rem;
+  height: 2.6rem;
   border-radius: 0.5rem;
   background-color: #311713;
   color: white;
   padding-left: 3rem;
   padding-right: 3rem;
   font-size: 1.4rem;
+  transition: all 0.3s;
+}
+
+.cta_signup_btn:hover {
+  color: #311713;
+  background-color: white;
+  outline: 1px solid #311713;
 }
 
 .cta_divider {
   background-color: #311713;
   height: 2.2rem;
   width: 1px;
+}
+
+.section_try {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  height: 50rem;
+  width: 100%;
+}
+
+.section_try_title {
+  background-color: #311713;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.try_title,
+.title_joke {
+  color: white;
+}
+
+.title_divider {
+  background-color: white;
+  height: 3rem;
+  width: 1px;
+}
+
+.section_try_body {
+  background-color: #231211;
+  flex: 3;
 }
 
 /*==================================
