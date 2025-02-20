@@ -1,0 +1,50 @@
+body {
+  font-weight: 300;
+  font-family: "Funnel Sans", sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 8rem;
+  gap: 2rem;
+  /* border: 1px solid red; */
+}
+
+.header_logo img {
+  height: 3.5rem;
+  margin-right: 10rem;
+}
+
+.nav_main {
+  margin-left: 5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  /* border: 1px solid red; */
+}
+
+.nav_el,
+.nav_el:link,
+.nav_el:visited {
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #311713;
+}
+
+.nav_signup {
+  margin-left: 1.5rem;
+  padding: 0.2rem 1rem 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: white !important;
+  background-color: #311713;
+}
+
+.nav_divider {
+  background-color: #311713;
+  height: 2rem;
+  width: 1px;
+}
