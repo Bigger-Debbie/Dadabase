@@ -3,6 +3,9 @@ body {
   font-family: "Funnel Sans", sans-serif;
 }
 
+/*==================================
+          HEADER STYLES
+====================================*/
 .header {
   display: flex;
   align-items: center;
@@ -33,18 +36,70 @@ body {
   font-size: 1.5rem;
   text-decoration: none;
   color: #311713;
+  transition: all 0.3s;
+}
+
+.nav_el:hover {
+  box-shadow: 0 2px 0 #311713;
 }
 
 .nav_signup {
   margin-left: 1.5rem;
-  padding: 0.2rem 1rem 0.5rem 1rem;
+  padding: 0.3rem 1rem 0.5rem 1rem;
   border-radius: 0.5rem;
-  color: white !important;
+  color: white;
   background-color: #311713;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 1.4rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.nav_signup:hover {
+  color: #311713;
+  outline: 2px solid #311713;
+  background-color: white;
 }
 
 .nav_divider {
   background-color: #311713;
   height: 2rem;
   width: 1px;
+}
+
+/*==================================
+          FOOTER STYLES
+====================================*/
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 8rem;
+  gap: 1rem;
+  /* border: 1px solid red; */
+}
+
+.footer_divider {
+  background-color: #311713;
+  height: 2px;
+  width: 65vw;
+}
+
+.footer_content {
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer_logo img {
+  height: 2.5rem;
+}
+
+.trademark {
+  font-size: 1.4rem;
+  margin: 0;
 }
