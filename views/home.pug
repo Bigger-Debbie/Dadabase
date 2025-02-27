@@ -1,37 +1,53 @@
 extends base
 
 block content
-  main.main
-    section.section_hero
-      .hero_image
-        img(src='/img/hero_image.svg' alt='Laughing Emojis')
-      .hero_cta
-        .cta
-          .cta_text
-            h2 
-              | Why did the user sign up? . . . Because it was free.
-              br
-              | (And they love dad jokes.)
-            p.
-              By signing up, you will gain the ability to
-              submit your best dad jokes to the Dadabase.
-              Submitted jokes are reviewed to assure that
-              only the highest quality jokes are available
-              for all the dads (and others) out there. 
-          .cta_form
-            form.signup_form
-              label Email
-              input.email_input(type="text" id="email" name="email" placeholder="papajim@example.com")
-            .btn_container
-              input.cta_signup_btn(type="submit" value="Sign Up")
-              .cta_divider
-              p Its Free
-    section.section_try
-      .section_try_title
-        h1.try_title Try It
-        .title_divider
-        h2.title_joke
-          | Press the button! No tools required
-          br
-          | dads will be jealous
-      .section_try_body
+  section.hero
+    .hero_left
+      img(src="img/hero_image.svg" alt="Laughing Emojies")
+    .hero_right
+      .cta
+        .cta_content
+          h2 
+            | Why did the user sign up? . . . Because it was free.
+            br
+            | (And they love dad jokes.)
+          p.
+            By signing up, you will gain the ability to
+            submit your best dad jokes to the Dadabase.
+            Submitted jokes are reviewed to assure that
+            only the highest quality jokes are available
+            for all the dads (and others) out there.
+        form.cta_form
+          label Email
+          input.cta_email(type="email" placeholder="dad@thedadabase.net" required)
+          .cta_submition
+            input.cta_submit.brown__btn(type="submit" value="Sign Up")
+            .vert__divider
+            p It's Free
+  
+  section.try
+    .try_title
+      h1 Try It
+      .vert__divider
+      h2 
+        | Press the button! No tools required
+        br
+        | dads will be jealous.
+    .try_content
+      .content__container
+        p Retrieve a random dad joke in JSON format from the Dadabase:
+        .send_container
+          .endpoint_container
+            p.get GET
+            p https://thedadabase.net/api/joke/
+          button Send Request
+        p Below is an example response:
+        .response_container
+          pre
+            code.
+              {
+                “Response”: “Example Response... kidding, click the button!”
+              }
+        p.
+          Explore the documentation below to learn more about the various API
+          calls you can make to the Dadabase.
