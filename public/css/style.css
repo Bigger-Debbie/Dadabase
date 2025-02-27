@@ -26,6 +26,7 @@ h1 {
 
 h2 {
   font-size: 3.5rem;
+  line-height: 1.2;
 }
 
 p,
@@ -187,7 +188,7 @@ input::placeholder {
 .try {
   display: flex;
   flex-direction: column;
-  margin-top: 4rem;
+  margin-top: 6rem;
   margin-bottom: 4rem;
 }
 
@@ -198,8 +199,8 @@ input::placeholder {
   align-items: center;
   flex: 1;
   gap: 3rem;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .try_title h1,
@@ -209,7 +210,7 @@ input::placeholder {
 
 .try_title .vert__divider {
   background-color: white;
-  height: 6rem;
+  height: 7rem;
 }
 
 .try_content {
@@ -274,6 +275,14 @@ input::placeholder {
   width: 96%;
 }
 
+.response_container pre {
+  width: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
 .response_container code {
   font-size: 1.5rem;
+  display: block;
+  width: 100%;
 }
