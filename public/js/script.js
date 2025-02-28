@@ -45,7 +45,7 @@ function toggleCategory(category) {
     category.isOpen = false;
   } else {
     category.arrow.style.transform = "rotate(90deg)";
-    category.content.style.display = "block";
+    category.content.style.display = "flex";
     category.isOpen = true;
   }
 }

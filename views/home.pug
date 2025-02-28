@@ -46,7 +46,7 @@ block content
           pre
             code.
               {
-                “Response”: “Example Response... kidding, click the button!”
+                "Response": "Example Response... kidding, click the button!"
               }
         p.
           Explore the documentation below to learn more about the various API
@@ -57,33 +57,53 @@ block content
       h1 Docs
       .vert__divider
       h2 
-        | Because ‘winging it’ only works
+        | Because 'winging it' only works for
         br
-        | for BBQ, not APIs.
+        | BBQ, not APIs.
     .docs_content
       .content__container
         p.
           APIs are only as good as the documentation available.
           Select a drop down below to read more about a specific
           category.
-        .auth.category_header
+        .auth.category__header
           h2 Authorization
           ion-icon(name="chevron-forward-outline")
-        .auth_content
+        .auth_content.content
           p
             | Getting started, if you want to put those creative juices to the test - you
-            | have to be signed in first. If you have something against GUIs feel free to
+            | have to be signed in. If you have something against GUIs feel free to
             | sign up using the API.
             br
             br
             | To sign up send a request to the following endpoint:
+          .sign_up.endpoint__header
+            .endpoint__header-left
+              p.post POST
+              p https://thedadabase.net/api/user/signup/
+            ion-icon(name="chevron-forward-outline")
+          .login.endpoint__header
+            .endpoint__header-left
+              p.post POST
+              p https://thedadabase.net/api/user/login/
+            ion-icon(name="chevron-forward-outline")
+          .forgot.endpoint__header
+            .endpoint__header-left
+              p.post POST
+              p https://thedadabase.net/api/user/forgotPassword/
+            ion-icon(name="chevron-forward-outline")
+          .reset.endpoint__header
+            .endpoint__header-left
+              p.patch PATCH
+              p https://thedadabase.net/api/user/resetPassword/
+            ion-icon(name="chevron-forward-outline")
 
-        .jokes.category_header
+        .jokes.category__header
           h2 Jokes
           ion-icon(name="chevron-forward-outline")
-        .jokes_content
+        .jokes_content.content
 
-        .admin.category_header
+        .admin.category__header
           h2 Administration
           ion-icon(name="chevron-forward-outline")
-        .admin_content
+        .admin_content.content
