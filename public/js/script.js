@@ -17,6 +17,30 @@ const categories = [
   },
 ];
 
+// Add new endpoints array
+const endpoints = [
+  {
+    arrow: document.querySelector(".sign_up ion-icon"),
+    content: document.querySelector(".sign_up_endpoint"),
+    isOpen: false,
+  },
+  {
+    arrow: document.querySelector(".login ion-icon"),
+    content: document.querySelector(".login_endpoint"),
+    isOpen: false,
+  },
+  {
+    arrow: document.querySelector(".forgot ion-icon"),
+    content: document.querySelector(".forgot_endpoint"),
+    isOpen: false,
+  },
+  {
+    arrow: document.querySelector(".reset ion-icon"),
+    content: document.querySelector(".reset_endpoint"),
+    isOpen: false,
+  },
+];
+
 async function getJoke() {
   const response = await fetch("http://127.0.0.1:8000/api/joke", {
     method: "GET",
@@ -50,6 +74,19 @@ function toggleCategory(category) {
   }
 }
 
+// Modify the toggle function for endpoints to allow multiple open at once
+function toggleEndpoint(endpoint) {
+  if (endpoint.isOpen) {
+    endpoint.arrow.style.transform = "rotate(0deg)";
+    endpoint.content.style.display = "none";
+    endpoint.isOpen = false;
+  } else {
+    endpoint.arrow.style.transform = "rotate(90deg)";
+    endpoint.content.style.display = "flex";
+    endpoint.isOpen = true;
+  }
+}
+
 send_req.addEventListener("click", async (e) => {
   e.preventDefault();
 
@@ -64,4 +101,15 @@ categories.forEach((category) => {
     e.preventDefault();
     toggleCategory(category);
   });
+});
+
+// Add new event listeners for endpoints
+endpoints.forEach((endpoint) => {
+  if (endpoint.arrow) {
+    // Check if arrow exists before adding listener
+    endpoint.arrow.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleEndpoint(endpoint);
+    });
+  }
 });

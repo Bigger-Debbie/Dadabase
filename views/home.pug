@@ -77,26 +77,104 @@ block content
             br
             br
             | To sign up send a request to the following endpoint:
+
           .sign_up.endpoint__header
             .endpoint__header-left
               p.post POST
               p https://thedadabase.net/api/user/signup/
             ion-icon(name="chevron-forward-outline")
+          .sign_up_endpoint.endpoint_content
+            p.
+              In the body of the post request you will need to provide four fields, your
+              name, your email, your password, and you must confirm your password. Here
+              is an example: 
+            .example_container
+              pre
+                code.
+                  {
+                    “name”: “papa jim”,
+                    “email: ”papajim@thedadabase.net”,
+                    “password”: “example1234!”,
+                    “passwordConfirm: ”example1234!”
+                  }
+            p.
+              If you did everything correctly, you will get return response from the
+              Dadabase with your newly created account and authentication token.
+              In postman for example, you can use this as a bearer token to
+              authenticate with any following calls that require authentication.
+            p 
+            p Here is an example of the return resonse when signing up:
+            .example_container
+              pre
+                code.
+                  {
+                    "status": "success",
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e
+                    yJpZCI6IjY3YjU0NDc4ZGQwYzFkYTA0ZTY5NjJkNiIsImlhd
+                    CI6MTczOTkzMjc5MiwiZXhwIjoxNzM5OTM0NTkyfQ.h0Cx18
+                    xXh4uu1azsnU1D379yDvLGBhqUDFKm0aBC5Qs",
+                    "data": {
+                          "user": {
+                              "name": "papa jim",
+                              "email": "papajim@thedadabase.net",
+                              "role": "user",
+                              "_id": "67b54478dd0c1da04e6962d6"
+                          }
+                    }
+                  }
+
           .login.endpoint__header
             .endpoint__header-left
               p.post POST
               p https://thedadabase.net/api/user/login/
             ion-icon(name="chevron-forward-outline")
+          .login_endpoint.endpoint_content
+            p.
+              If you've already created an account, you can use the login
+              endpoint to get an authentication token. Below is an example
+              of a login request:
+            .example_container
+              pre
+                code.
+                  {
+                      "email": "papajim@thedadabase.net",
+                      "password": "example!"
+                  }
+            p.
+              Assuming you remembered your login information and signed in
+              successfully, you will get a response containing your 
+              authorization token. Here is an example response:
+            .example_container
+              pre
+                code.
+                  {
+                      "status": "success",
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YTY1ODVkZmE1NTI3MTM3YmNjNjZjZCIsImlhdCI6MTc0MDk2MjM3NSwiZXhwIjoxNzQwOTY0MTc1fQ.exd7zSK0nkS0XTsGcSlSEn0Bsf911TfW27sxLluoor4",
+                      "data": {
+                          "user": {
+                              "_id": "67a6585dfa5527137bcc66cd",
+                              "name": "papa jim",
+                              "email": "papjim@thedadabase.net",
+                              "role": "user",
+                          }
+                      }
+                  }
+
           .forgot.endpoint__header
             .endpoint__header-left
               p.post POST
               p https://thedadabase.net/api/user/forgotPassword/
             ion-icon(name="chevron-forward-outline")
+          .forgot_endpoint.endpoint_content
+            p Forgot password endpoint documentation goes here.
+
           .reset.endpoint__header
             .endpoint__header-left
               p.patch PATCH
               p https://thedadabase.net/api/user/resetPassword/
             ion-icon(name="chevron-forward-outline")
+          .reset_endpoint.endpoint_content
+            p Reset password endpoint documentation goes here.
 
         .jokes.category__header
           h2 Jokes
