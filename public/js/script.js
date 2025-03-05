@@ -39,6 +39,26 @@ const endpoints = [
     content: document.querySelector(".reset_endpoint"),
     isOpen: false,
   },
+  {
+    arrow: document.querySelector(".random_joke ion-icon"),
+    content: document.querySelector(".random_joke_endpoint"),
+    isOpen: false,
+  },
+  {
+    arrow: document.querySelector(".tag_joke ion-icon"),
+    content: document.querySelector(".tag_joke_endpoint"),
+    isOpen: false,
+  },
+  {
+    arrow: document.querySelector(".daily_joke ion-icon"),
+    content: document.querySelector(".daily_joke_endpoint"),
+    isOpen: false,
+  },
+  {
+    arrow: document.querySelector(".submit_joke ion-icon"),
+    content: document.querySelector(".submit_joke_endpoint"),
+    isOpen: false,
+  },
 ];
 
 async function getJoke() {
@@ -55,14 +75,6 @@ async function getJoke() {
 }
 
 function toggleCategory(category) {
-  categories.forEach((cat) => {
-    if (cat !== category) {
-      cat.arrow.style.transform = "rotate(0deg)";
-      cat.content.style.display = "none";
-      cat.isOpen = false;
-    }
-  });
-
   if (category.isOpen) {
     category.arrow.style.transform = "rotate(0deg)";
     category.content.style.display = "none";
@@ -92,8 +104,16 @@ send_req.addEventListener("click", async (e) => {
 
   const joke = await getJoke();
   const response = document.querySelector(".response_container pre code");
+  const container = document.querySelector(".response_container");
 
   response.textContent = JSON.stringify(joke, null, 2);
+
+  // Remove animation class if it exists
+  container.classList.remove("pulse-animation");
+  // Trigger reflow
+  void container.offsetWidth;
+  // Add animation class
+  container.classList.add("pulse-animation");
 });
 
 categories.forEach((category) => {

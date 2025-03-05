@@ -166,20 +166,117 @@ block content
               p https://thedadabase.net/api/user/forgotPassword/
             ion-icon(name="chevron-forward-outline")
           .forgot_endpoint.endpoint_content
-            p Forgot password endpoint documentation goes here.
-
-          .reset.endpoint__header
-            .endpoint__header-left
-              p.patch PATCH
-              p https://thedadabase.net/api/user/resetPassword/
-            ion-icon(name="chevron-forward-outline")
-          .reset_endpoint.endpoint_content
-            p Reset password endpoint documentation goes here.
+            p.
+              It happens to the best of us, you forgot your password. Lucky for you
+              this is easy to resolve. Simply send a request to the forgot password
+              endpoint with the email address for the account. Here is an example:
+            .example_container
+              pre
+                code.
+                  {
+                    "email": "papajim@thedadabase.net"
+                  }
+            p.
+              If an account is found with that email address this request will prompt
+              a password reset email to be sent out. Sign into the email you provided
+              to retrieve your password reset link. Simple as that!
 
         .jokes.category__header
           h2 Jokes
           ion-icon(name="chevron-forward-outline")
         .jokes_content.content
+          p
+            | This is what you are here for. The best dad jokes collected and stored in
+            | the Dadabase for your laughing pleasure. You have a couple options to choose
+            | from when requesting a top teir dad joke.
+            br
+            br
+            | Select one of the endpoints below to learn more:
+          .random_joke.endpoint__header
+            .endpoint__header-left
+              p.get GET
+              p https://thedadabase.net/api/joke/
+            ion-icon(name="chevron-forward-outline")
+          .random_joke_endpoint.endpoint_content
+            p.
+              You want a random laugh, you're in the right place. Use this endpoint to
+              get a random dad joke. No authentication or parameters needed. Simply send
+              a request to this endpoint and it will return a random dad joke. Here is an
+              example response:
+            .example_container
+              pre
+                code.
+                  {
+                    "status": "success",
+                    "joke": {
+                      "_id": "67b22dd134ffc1a244666c8e",
+                      "joke": "Why does the Norwegian navy have barcodes on the side on their ships? So they can Scandinavian...",
+                      "dad": {
+                        "_id": "67a67e614c287136f43df153",
+                        "name": "papa jim",
+                      },
+                      "tags": [
+                        "norwegian",
+                        "barcodes",
+                        "ships",
+                        "scandinavian"
+                      ]
+                    }
+                  }
+
+          .tag_joke.endpoint__header
+            .endpoint__header-left
+              p.get GET
+              p https://thedadabase.net/api/joke?tags=
+            ion-icon(name="chevron-forward-outline")
+          .tag_joke_endpoint.endpoint_content
+            p.
+              If you are looking for a more specific joke, use this endpoint. This endpoint
+              allows you to specify tags to search for jokes that match those tags. Here is
+              an example of the endpoint with tags specified:
+            .example_container
+              pre
+                  code.
+                    https://thedadabase.net/api/joke?tags=cows,hooves
+            p.
+              This will return a joke that matches one or more of the tags speficied. Below
+              is an example response:
+            .example_container
+              pre
+                  code.
+                    {
+                      "status": "success",
+                      "jokes": [
+                        {
+                          "_id": "67b25e8f5cd70e18f55b474c",
+                          "joke": "Why do cows have hooves instead of feet? Because they lactose!",
+                          "dad": {
+                              "_id": "67a6585dfa5527137bcc66cd",
+                              "name": "pap jim",
+                          },
+                          "tags": [
+                              "cows",
+                              "feet",
+                              "milk",
+                              "lactose"
+                          ]
+                        }
+                      ]
+                    }
+
+          .daily_joke.endpoint__header
+            .endpoint__header-left
+              p.get GET
+              p https://thedadabase.net/api/joke/dailyjoke
+            ion-icon(name="chevron-forward-outline")
+          .daily_joke_endpoint.endpoint_content
+
+          .submit_joke.endpoint__header
+            .endpoint__header-left
+              p.post POST
+              p https://thedadabase.net/api/joke/submit
+            ion-icon(name="chevron-forward-outline")
+          .submit_joke_endpoint.endpoint_content
 
         .admin.category__header
           h2 Administration

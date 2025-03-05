@@ -36,6 +36,18 @@ input::placeholder {
   font-size: 2.3rem;
 }
 
+@keyframes pulseBorder {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .nav__el {
   white-space: nowrap;
   font-size: 2.3rem;
@@ -336,6 +348,7 @@ input::placeholder {
   border-radius: 0.7rem;
   padding: 1rem;
   width: 96%;
+  position: relative;
 }
 
 .response_container pre,
@@ -402,7 +415,8 @@ input::placeholder {
   font-size: 3.3rem;
 }
 
-.sign_up {
+.sign_up,
+.random_joke {
   margin-top: 2rem;
 }
 
@@ -414,4 +428,17 @@ input::placeholder {
   border: 1px solid #3f1611;
   padding: 1rem;
   width: 98%;
+}
+
+.pulse-animation::after {
+  content: "";
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  right: 0.2rem;
+  bottom: 0.2rem;
+  border: 4px solid #9ccc4d;
+  border-radius: 0.5rem;
+  pointer-events: none;
+  animation: pulseBorder 1s ease-in-out forwards;
 }
