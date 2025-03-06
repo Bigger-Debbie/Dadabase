@@ -270,6 +270,11 @@ block content
               p https://thedadabase.net/api/joke/dailyjoke
             ion-icon(name="chevron-forward-outline")
           .daily_joke_endpoint.endpoint_content
+            p.
+              This endpoint is pretty self explaintory. Every day the Dadabase team will select
+              a joke of the day. When sending a request to this endpoint you will get the
+              selected joke of the day. If you feel like you have a joke worthy of joke of the
+              day, use the next endpoint to submit your jokes!
 
           .submit_joke.endpoint__header
             .endpoint__header-left
@@ -277,8 +282,49 @@ block content
               p https://thedadabase.net/api/joke/submit
             ion-icon(name="chevron-forward-outline")
           .submit_joke_endpoint.endpoint_content
+            p.
+              This is your chance to make the world a funnier place. Submit best jokes using
+              this endpoint. After authenticating, simply send a post request to this endpoint
+              with a "joke" value in the body. Here is an example:
+            .example_container
+              pre
+                  code.
+                    {
+                      "joke": "I just found out I’m colorblind. The news came out of the purple!"
+                    }
+            p.
+              Submitted jokes go into the submittion queue to be reviewed for quality and appropriate
+              content. After sending your authenticated post request you will recive a request like
+              the following:
+            .example_container
+              pre
+                  code.
+                    {
+                      "status": "success",
+                      "joke": {
+                        "_id": "67c8f47b8675fc539fbe3873",
+                        "joke": "I just found out I’m colorblind. The news came out of the purple!",
+                        "dad": {
+                            "_id": "67a6585dfa5527137bcc66cd",
+                            "name": "pap jim",
+                        },
+                        "tags": [],
+                        "status": "review"
+                      }
+                    }
+        if user
+          .admin.category__header
+            h2 Administration
+            ion-icon(name="chevron-forward-outline")
+          .admin_content.content
 
-        .admin.category__header
-          h2 Administration
-          ion-icon(name="chevron-forward-outline")
-        .admin_content.content
+  section.donate
+    .donate_title
+      h1 Donate
+      .vert__divider
+      h2 
+        | Because laughter is free,
+        br
+        | but servers aren’t!
+    .donate_content
+      .content__container
