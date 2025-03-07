@@ -133,3 +133,25 @@ endpoints.forEach((endpoint) => {
     });
   }
 });
+
+// Add smooth scrolling for navigation links
+document.querySelectorAll(".header_nav .nav__el").forEach((link) => {
+  link.addEventListener("click", (e) => {
+    const link = e.target.innerText.toLowerCase();
+
+    if (["try", "docs", "donate"].includes(link)) {
+      e.preventDefault();
+      const section = document.querySelector(`.${link}`);
+      if (section) {
+        // Force scroll to top of section
+        const headerOffset =
+          document.querySelector(".page_header").offsetHeight;
+
+        window.scrollTo({
+          top: section.offsetTop - headerOffset,
+          behavior: "smooth",
+        });
+      }
+    }
+  });
+});

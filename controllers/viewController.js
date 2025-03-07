@@ -6,3 +6,9 @@ exports.getHome = catchAsync(async (req, res, next) => {
     user: "Alex",
   });
 });
+
+exports.getLogin = catchAsync(async (req, res, next) => {
+  res.status(200).render("login", {
+    title: "Login",
+  });
+});

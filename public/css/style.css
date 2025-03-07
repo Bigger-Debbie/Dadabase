@@ -36,6 +36,10 @@ input::placeholder {
   font-size: 2.3rem;
 }
 
+input::placeholder {
+  color: #bbbbbb;
+}
+
 @keyframes pulseBorder {
   0% {
     opacity: 0;
@@ -48,11 +52,17 @@ input::placeholder {
   }
 }
 
-.nav__el {
+.nav__el,
+.nav_cta {
   white-space: nowrap;
   font-size: 2.3rem;
   color: #3f1611;
   text-decoration: none;
+  transition: 0.1s ease-in;
+}
+
+.nav__el:hover {
+  box-shadow: 0 2px 0 #3f1611;
 }
 
 .vert__divider {
