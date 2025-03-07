@@ -61,6 +61,11 @@ input::placeholder {
   height: 3.2rem;
 }
 
+.horz__divider {
+  background-color: white;
+  height: 0.1rem;
+}
+
 .brown__btn {
   display: flex;
   justify-content: center;
@@ -469,6 +474,85 @@ input::placeholder {
   background-color: #8183bf;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex: 3;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.donate_left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.donate_right {
+  flex: 1;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 55rem;
+  background-image: url("/img/donate_background.svg");
+}
+
+.donate_right img {
+  height: 93%;
+  margin-left: 3rem;
+}
+
+.donate_text {
+  width: 58rem;
+  padding: 1rem;
+  margin-left: auto;
+  margin-right: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 3rem;
+}
+
+.donate_text button {
+  border: 1px solid white;
+  border-radius: 0.7rem;
+  background-color: #8183bf;
+  font-size: 2.3rem;
+  color: white;
+  height: 60%;
+  width: 30%;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+
+.donate_text button:hover {
+  transform: scale(1.02);
+}
+
+/* FOOTER STYLES */
+.page_footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+footer .horz__divider {
+  background-color: #3f1611;
+  width: 80%;
+}
+
+.footer_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem;
+  width: 80%;
+  gap: 5rem;
+}
+
+.footer_content img {
+  height: 5rem;
 }
