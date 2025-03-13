@@ -8,6 +8,12 @@ html {
   font-size: 10px;
 }
 
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 body,
 input,
 button {
@@ -539,6 +545,89 @@ input::placeholder {
   transform: scale(1.02);
 }
 
+/* LOGIN STLYES */
+.login {
+  display: flex;
+  min-height: calc(100vh - 30rem); /* 13rem header + 3rem margin-top */
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.login_left,
+.login_right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.login_left {
+  background-image: url("/img/hero_background.svg");
+}
+
+.login_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  height: 50rem;
+  width: 85rem;
+  border: 5px solid #3f1611;
+  border-radius: 2rem;
+  background-color: white;
+}
+
+.login_img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  padding: 3rem;
+}
+
+.login_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  flex: 2;
+  height: 100%;
+}
+
+.login_form form {
+  flex: 1;
+  display: flex;
+  justify-content: top;
+  align-items: right;
+  flex-direction: column;
+  padding-top: 2.5rem;
+  gap: 1rem;
+}
+
+.login_email,
+.login_pass {
+  width: 100%;
+  height: 4rem;
+  border-radius: 0.5rem;
+  border: 1px solid #3f1611;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.login_submition {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 2rem;
+}
+
 /* FOOTER STYLES */
 .page_footer {
   display: flex;
@@ -546,6 +635,7 @@ input::placeholder {
   justify-content: center;
   align-items: center;
   padding: 2rem;
+  margin-top: auto;
 }
 
 footer .horz__divider {

@@ -1,4 +1,19 @@
 extends base
 
 block content
-  h2 Log In
+  section.login
+    .login_left
+    .login_right
+    .login_container
+      .login_img
+        img(src="img/login_logo.svg" alt="Laughing Emojies")
+      .login_form
+        form
+          label Email
+          input.login_email(type="email" placeholder="dad@thedadabase.net" required)
+          label Password
+          input.login_pass(type="password" required)
+          .login_submition
+            input.login_submit.brown__btn(type="submit" value="Login")
+            .vert__divider
+            p Fogot Password
