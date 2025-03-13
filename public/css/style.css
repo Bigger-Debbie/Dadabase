@@ -215,6 +215,10 @@ input::placeholder {
   margin-top: 0.5rem;
 }
 
+.header_nav p {
+  color: #3f1611;
+}
+
 /* HOME STYLES */
 .hero {
   display: flex;

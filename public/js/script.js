@@ -1,5 +1,7 @@
 const send_req = document.querySelector(".send_req");
 const login_form = document.querySelector("form");
+const cta_btn = document.querySelector(".nav_cta");
+const admin_section = document.querySelector(".admin");
 
 const categories = [
   {
@@ -10,11 +12,6 @@ const categories = [
   {
     arrow: document.querySelector(".jokes ion-icon"),
     content: document.querySelector(".jokes_content"),
-    isOpen: false,
-  },
-  {
-    arrow: document.querySelector(".admin ion-icon"),
-    content: document.querySelector(".admin_content"),
     isOpen: false,
   },
 ];
@@ -62,6 +59,14 @@ const endpoints = [
     isOpen: false,
   },
 ];
+
+if (admin_section) {
+  categories.push({
+    arrow: document.querySelector(".admin ion-icon"),
+    content: document.querySelector(".admin_content"),
+    isOpen: false,
+  });
+}
 
 async function getJoke() {
   const response = await fetch("http://127.0.0.1:8000/api/joke", {
@@ -157,3 +162,20 @@ document.querySelectorAll(".header_nav .nav__el").forEach((link) => {
     }
   });
 });
+
+if (cta_btn.innerText === "Log Out") {
+  cta_btn.addEventListener("click", async (e) => {
+    try {
+      const res = await fetch("http://127.0.0.1:8000/api/user/logout", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.status === 200) location.reload(true);
+    } catch (err) {
+      console.log(err.response);
+    }
+  });
+}

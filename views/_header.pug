@@ -7,5 +7,11 @@ header.page_header
     a.nav__el(href="http://127.0.0.1:8000/") Docs
     a.nav__el(href="http://127.0.0.1:8000/") Donate
     .vert__divider
-    a.nav__el(href="http://127.0.0.1:8000/login") Log In
-    a.nav_cta.brown__btn(href="#") Sign Up
+    if user
+      - const firstName = user.name.split(" ")[0]
+      - const capFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1)
+      p= `Welcome, ${capFirstName}`
+      a.nav_cta.brown__btn(href="#") Log Out
+    else
+      a.nav__el(href="http://127.0.0.1:8000/login") Log In
+      a.nav_cta.brown__btn(href="#") Sign Up

@@ -312,7 +312,7 @@ block content
                         "status": "review"
                       }
                     }
-        if user
+        if user && user.role === "admin"
           .admin.category__header
             h2 Administration
             ion-icon(name="chevron-forward-outline")
