@@ -24,4 +24,7 @@ html
     // FOOTER
     include _footer
 
-    script(src='/js/script.js')
+    if page === "/"
+      script(src='/js/script.js')
+    else if page === "/login"
+      script(src='/js/login.js')

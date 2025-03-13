@@ -1,4 +1,6 @@
 const send_req = document.querySelector(".send_req");
+const login_form = document.querySelector("form");
+
 const categories = [
   {
     arrow: document.querySelector(".auth ion-icon"),

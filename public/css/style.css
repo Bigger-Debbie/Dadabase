@@ -546,7 +546,7 @@ input::placeholder {
 }
 
 /* LOGIN STLYES */
-.login {
+.login_section {
   display: flex;
   min-height: calc(100vh - 30rem); /* 13rem header + 3rem margin-top */
   margin-top: 1rem;
@@ -575,7 +575,7 @@ input::placeholder {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  height: 50rem;
+  height: 45rem;
   width: 85rem;
   border: 5px solid #3f1611;
   border-radius: 2rem;
