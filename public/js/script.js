@@ -7,7 +7,7 @@ const categories = [
   {
     arrow: document.querySelector(".auth ion-icon"),
     content: document.querySelector(".auth_content"),
-    isOpen: false,
+    isOpen: true,
   },
   {
     arrow: document.querySelector(".jokes ion-icon"),
@@ -15,6 +15,13 @@ const categories = [
     isOpen: false,
   },
 ];
+
+// Initialize the auth category to be open by default
+const authCategory = categories[0];
+if (authCategory.arrow && authCategory.content) {
+  authCategory.arrow.style.transform = "rotate(90deg)";
+  authCategory.content.style.display = "flex";
+}
 
 // Add new endpoints array
 const endpoints = [
