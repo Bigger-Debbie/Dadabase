@@ -7,9 +7,15 @@ exports.getHome = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getLogin = catchAsync(async (req, res, next) => {
+exports.login = (req, res, next) => {
   res.status(200).render("login", {
     page: req.url,
     title: "Login",
   });
-});
+};
+
+exports.signUp = (req, res, next) => {
+  res.status(200).render("signup", {
+    title: "Sign Up",
+  });
+};
