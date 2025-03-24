@@ -7,12 +7,14 @@ block content
     .signup_container
       .signup_form
         form
+          label Name
+          input.signup_name(type="text" placeholder="Papa Jim" required)
           label Email
           input.signup_email(type="email" placeholder="dad@thedadabase.net" required)
           label Password
           input.signup_pass(type="password" required)
           label Confirm Password
-          input.signup_pass(type="password" required)
+          input.signup_pass_confirm(type="password" required)
           .signup_submition
             input.signup_submit.brown__btn(type="submit" value="Sign Up" id="signUpButton")
             .vert__divider

@@ -591,6 +591,11 @@ input::placeholder {
   background-color: white;
 }
 
+.signup_container {
+  height: 55rem;
+  width: 90rem;
+}
+
 .login_img,
 .signup_img {
   display: flex;
@@ -632,8 +637,11 @@ input::placeholder {
 
 .login_email,
 .login_pass,
+.login_pass_confirm,
+.signup_name,
 .signup_email,
-.signup_pass {
+.signup_pass,
+.signup_pass_confirm {
   width: 100%;
   height: 4rem;
   border-radius: 0.5rem;

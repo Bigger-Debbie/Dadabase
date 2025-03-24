@@ -7,5 +7,6 @@ const router = new express.Router();
 router.get("/", authController.isLoggedIn, viewController.getHome);
 router.get("/login", viewController.login);
 router.get("/signup", viewController.signUp);
+router.get("/resetpassword/:token", viewController.resetPassword);
 
 module.exports = router;

@@ -34,6 +34,27 @@ const createSendToken = (user, statusCode, req, res) => {
   });
 };
 
+exports.checkToken = async (token) => {
+  if (!token) {
+    console.log("No token provided");
+    return null;
+  }
+
+  const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+  console.log("Checking reset token:", {
+    originalToken: token,
+    hashedToken: hashedToken,
+  });
+
+  const user = await User.findOne({
+    passwordResetToken: hashedToken,
+    passwordResetExpires: { $gt: Date.now() },
+  });
+  console.log("Found user:", user ? "Yes" : "No");
+
+  return user;
+};
+
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     name: req.body.name,
@@ -41,7 +62,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
-
+  await new Email(newUser, url).verification();
   createSendToken(newUser, 201, req, res);
 });
 
@@ -153,8 +174,8 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   const resetPath = `${req.protocol}://${req.get(
     "host"
-  )}/api/user/resetPassword/${resetToken}`;
-  await new Email(user).forgotPassword(resetPath);
+  )}/resetpassword/${resetToken}`;
+  await new Email(user, resetPath).forgotPassword();
 
   res.status(200).json({
     status: "success",
@@ -163,15 +184,13 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
-  const hashedToken = crypto
-    .createHash("sha256")
-    .update(req.params.token)
-    .digest("hex");
+  console.log("Reset password attempt with token:", req.params.token);
 
-  const user = await User.findOne({
-    passwordResetToken: hashedToken,
-    passwordResetExpires: { $gt: Date.now() },
-  });
+  if (!req.params.token) {
+    return next(new AppError("No reset token provided.", 400));
+  }
+
+  const user = await exports.checkToken(req.params.token);
 
   if (!user)
     return next(new AppError("Reset token is invalid or has expired.", 400));

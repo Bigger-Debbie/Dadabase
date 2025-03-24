@@ -1,0 +1,19 @@
+extends base
+
+block content
+  section.login_section
+    .login_left
+    .login_right
+    .login_container
+      .login_img
+        img(src="/img/forgot_logo.svg" alt="Laughing Emojies")
+      .login_form
+        form
+          label New Password
+          input.login_pass(type="password" required)
+          label Confirm Password
+          input.login_pass_confirm(type="password" required)
+          .login_submition
+            input.login_submit.brown__btn(data-token=token type="submit" value="Update" id="loginButton")
+            .vert__divider
+            p Dont forget it

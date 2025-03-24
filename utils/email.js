@@ -1,18 +1,20 @@
 const nodemailer = require("nodemailer");
 const catchAsync = require("./catchAsync");
+const pug = require("pug");
 
 module.exports = class Email {
-  constructor(user) {
+  constructor(user, url) {
     this.to = user.email;
     this.firstName = user.name.split(" ")[0];
+    this.url = url;
     this.from = `Do Not Reply <${process.env.EMAIL_FROM}>`;
   }
 
   newTransport() {
     return nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
+      host: "smtp.mandrillapp.com",
       port: 587,
-      secure: false, // true for port 465, false for other ports
+      secure: false,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD,
@@ -20,22 +22,29 @@ module.exports = class Email {
     });
   }
 
-  async send(subject, message) {
+  async send(subject, template) {
+    const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
+      firstName: this.firstName,
+      baseUrl: "https://thedadabase.net",
+      url: this.url,
+      subject,
+    });
+
     const options = {
       from: this.from,
       to: this.to,
       subject: subject,
-      text: message,
-      html: `<p>${message}</p>`,
+      html,
     };
 
     await this.newTransport().sendMail(options);
   }
 
-  async forgotPassword(resetPath) {
-    await this.send(
-      "Password Reset",
-      `Your Password Reset Endpoint: ${resetPath}`
-    );
+  async verification() {
+    await this.send("Account Verification", "verification");
+  }
+
+  async forgotPassword() {
+    await this.send("Password Reset", "passwordReset");
   }
 };
