@@ -9,11 +9,12 @@ block content
         img(src="img/login_logo.svg" alt="Laughing Emojies")
       .login_form
         form
-          label Email
+          label.email_label Email
           input.login_email(type="email" placeholder="dad@thedadabase.net" required)
-          label Password
+          label.pass_label Password
           input.login_pass(type="password" required)
           .login_submition
             input.login_submit.brown__btn(type="submit" value="Login" id="loginButton")
             .vert__divider
-            p Fogot Password
+            a Forgot Password
+            p.status Email Sent

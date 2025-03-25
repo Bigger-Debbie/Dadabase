@@ -36,6 +36,7 @@ h2 {
 }
 
 p,
+a,
 label,
 input,
 input::placeholder {
@@ -59,15 +60,18 @@ input::placeholder {
 }
 
 .nav__el,
-.nav_cta {
+.nav_cta,
+.login_submition a {
   white-space: nowrap;
   font-size: 2.3rem;
   color: #3f1611;
   text-decoration: none;
+  cursor: pointer;
   transition: 0.1s ease-in;
 }
 
-.nav__el:hover {
+.nav__el:hover,
+.login_submition a:hover {
   box-shadow: 0 2px 0 #3f1611;
 }
 
@@ -657,6 +661,10 @@ input::placeholder {
   align-items: center;
   margin-top: 1rem;
   gap: 2rem;
+}
+
+.status {
+  display: none;
 }
 
 /* FOOTER STYLES */

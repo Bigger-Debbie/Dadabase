@@ -41,16 +41,10 @@ exports.checkToken = async (token) => {
   }
 
   const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
-  console.log("Checking reset token:", {
-    originalToken: token,
-    hashedToken: hashedToken,
-  });
-
   const user = await User.findOne({
     passwordResetToken: hashedToken,
     passwordResetExpires: { $gt: Date.now() },
   });
-  console.log("Found user:", user ? "Yes" : "No");
 
   return user;
 };
@@ -184,8 +178,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
-  console.log("Reset password attempt with token:", req.params.token);
-
   if (!req.params.token) {
     return next(new AppError("No reset token provided.", 400));
   }
