@@ -2,6 +2,7 @@ const send_req = document.querySelector(".send_req");
 const login_form = document.querySelector("form");
 const cta_btn = document.querySelector(".nav_cta");
 const admin_section = document.querySelector(".admin");
+const donate_btn = document.querySelector(".donate_btn");
 
 const categories = [
   {
@@ -186,3 +187,8 @@ if (cta_btn.innerText === "Log Out") {
     }
   });
 }
+
+donate_btn.addEventListener("click", (e) => {
+  const url = donate_btn.getAttribute("url");
+  window.open(url, "_blank");
+});

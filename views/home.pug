@@ -351,6 +351,13 @@ block content
             br
             |   - Alex 
           .horz__divider
-          button.send_req Donate
+          if user
+            - const email = user.email;
+            - const updated = email.replace("@", "%40");
+            - const url = process.env.NODE_ENV == "development" ? process.env.STRIPE_TEST_URL : process.env.STRIP_PROD_URL;
+            button.send_req.donate_btn(url=`${url}?prefilled_email=${updated}`) Donate
+          else
+            - const url = process.env.NODE_ENV == "development" ? process.env.STRIPE_TEST_URL : process.env.STRIP_PROD_URL;
+            button.send_req.donate_btn(url=url) Donate
       .donate_right
         img(src="/img/donate_logo.svg" alt="Laughing Emojies")
