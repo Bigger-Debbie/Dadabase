@@ -46,6 +46,7 @@ const userSchema = new mongoose.Schema({
     default: true,
     select: false,
   },
+  verificationNum: Number,
 });
 
 // On any find actions - only return active users

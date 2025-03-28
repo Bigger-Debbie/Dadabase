@@ -3,10 +3,11 @@ const catchAsync = require("./catchAsync");
 const pug = require("pug");
 
 module.exports = class Email {
-  constructor(user, url) {
+  constructor(user, url, verificationCode = "") {
     this.to = user.email;
     this.firstName = user.name.split(" ")[0];
     this.url = url;
+    this.verificationCode = verificationCode;
     this.from = `Do Not Reply <${process.env.EMAIL_FROM}>`;
   }
 
@@ -27,6 +28,7 @@ module.exports = class Email {
       firstName: this.firstName,
       baseUrl: "https://thedadabase.net",
       url: this.url,
+      verificationCode: this.verificationCode,
       subject,
     });
 

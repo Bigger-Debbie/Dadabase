@@ -50,14 +50,34 @@ exports.checkToken = async (token) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
+  const verificationNum = Math.floor(Math.random() * 100) + 1;
   const newUser = await User.create({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
+    verificationNum,
   });
-  await new Email(newUser, url).verification();
-  createSendToken(newUser, 201, req, res);
+
+  if (newUser) {
+    const verificationPath = `${req.protocol}://${req.get(
+      "host"
+    )}/verify/${verificationNum}/${encodeURIComponent(req.body.email)}`;
+
+    newUser.password = undefined;
+    newUser.active = undefined;
+    newUser.verificationNum = undefined;
+
+    await new Email(newUser, verificationPath, verificationNum).verification();
+    res.status(201).json({
+      status: "success",
+      data: {
+        newUser,
+      },
+    });
+  } else {
+    return next(new AppError("User account not created", 401));
+  }
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -195,4 +215,15 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   await user.save();
 
   createSendToken(user, 200, req, res);
+});
+
+exports.verify = catchAsync(async (req, res, next) => {
+  const user = User.findOne({ email: req.params.email });
+  const verifyWith = req.params.verification;
+
+  if (!user) return next(new AppError("User not found", 401));
+
+  const verifyBy = user.verificationNum;
+  if (verifyWith == verifyBy) createSendToken(user, 200, req, res);
+  else return next(new AppError("Could not verify account", 401));
 });

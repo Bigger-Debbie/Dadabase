@@ -33,7 +33,7 @@ signupForm.addEventListener("submit", async (e) => {
     passConfirm.value
   );
   if (status === "success") {
-    window.location.href = "http://127.0.0.1:8000/";
+    // window.location.href = "http://127.0.0.1:8000/";
   } else console.log("Invalid login...");
 
   pass.value = "";
