@@ -47,11 +47,22 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
   verificationNum: Number,
+  verificationStatus: {
+    type: String,
+    required: true,
+  },
 });
 
 // On any find actions - only return active users
 userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });
+  next();
+});
+
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("verificationStatus") || this.isNew) return next();
+
+  this.verificationNum = undefined;
   next();
 });
 

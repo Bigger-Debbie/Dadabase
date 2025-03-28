@@ -22,6 +22,8 @@ exports.signUp = (req, res, next) => {
   });
 };
 
+exports.verify = (req, res, next) => {};
+
 exports.resetPassword = catchAsync(async (req, res, next) => {
   const token = req.params.token;
   console.log(token);

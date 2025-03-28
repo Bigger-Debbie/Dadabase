@@ -57,6 +57,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
     verificationNum,
+    verificationStatus: "unverified",
   });
 
   if (newUser) {
@@ -218,12 +219,15 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.verify = catchAsync(async (req, res, next) => {
-  const user = User.findOne({ email: req.params.email });
-  const verifyWith = req.params.verification;
+  const user = await User.findOne({ email: req.params.email });
+  const verifyWith = req.params.verificationNum;
 
   if (!user) return next(new AppError("User not found", 401));
 
   const verifyBy = user.verificationNum;
-  if (verifyWith == verifyBy) createSendToken(user, 200, req, res);
-  else return next(new AppError("Could not verify account", 401));
+  if (verifyWith == verifyBy) {
+    user.verificationStatus = "verified";
+    await user.save({ validateBeforeSave: false });
+    createSendToken(user, 200, req, res);
+  } else return next(new AppError("Could not verify account", 401));
 });
