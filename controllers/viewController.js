@@ -22,7 +22,15 @@ exports.signUp = (req, res, next) => {
   });
 };
 
-exports.verify = (req, res, next) => {};
+exports.verify = (req, res, next) => {
+  const { verificationNum, email } = req.params;
+  res.status(200).render("verify", {
+    page: req.url,
+    title: "Verify Email",
+    email: email,
+    verificationNum: verificationNum,
+  });
+};
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
   const token = req.params.token;

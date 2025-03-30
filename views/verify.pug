@@ -15,20 +15,9 @@ html
       title Dadabase | #{title}
 
   body
-    // HEADER
-    include _header
+    .verify_container(verification=verificationNum email=email)
+      img(src="/img/header_logo.svg" alt="Dadabase Logo")
+      p Verifying Email Account - Please wait ...
 
-    // CONTENT
-    block content
-
-    // FOOTER
     include _footer
-
-    if page === "/"
-      script(src='/js/script.js')
-    else if page === "/login"
-      script(src='/js/login.js')
-    else if page === "/signup"
-      script(src='/js/signup.js')
-    else if page === `/resetpassword/${token}`
-      script(src='/js/reset.js')
+    script(src='/js/verify.js')

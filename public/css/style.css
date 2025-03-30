@@ -667,6 +667,20 @@ input::placeholder {
   display: none;
 }
 
+/* VERIFY STYLES */
+.verify_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  gap: 2rem;
+}
+
+.verify_container img {
+  height: 10rem;
+}
+
 /* FOOTER STYLES */
 .page_footer {
   display: flex;
